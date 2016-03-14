@@ -1,28 +1,29 @@
 {
-  "name": "MultiVision",
-  "version": "0.0.0",
+  "name": "Library-Management-System",
+  "version": "1.0.0",
   "description": "Extreme Tech Training",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": "0.10.x",
-    "npm": "1.3.x"
+    "node": "4.3.x",
+    "npm": "2.14.x"
   },
-  "author": "Joe Eames",
-  "license": "BSD-2-Clause",
+  "author": "Subhasis Dutta <sxd150830@utdallas.edu>",
+  "license": "MIT",
   "dependencies": {
-    "body-parser": "~1.2.0",
+    "body-parser": "^1.2.0",
     "cookie-parser": "^1.1.0",
-    "express": "~4.2.0",
+    "express": "^4.13.0",
     "express-session": "^1.2.1",
-    "jade": "~1.3.1",
+    "jade": "^1.3.1",
     "mongoose": "^4",
-    "morgan": "~1.0.1",
+    "morgan": "^1.0.1",
     "passport": "^0.2.0",
     "passport-local": "^1.0.0",
-    "stylus": "~0.45.0"
+    "stylus": "^0.45.0",
+    "mysql": "^2.10.2"
   },
   "devDependencies": {
     "karma": "^0.12.16",

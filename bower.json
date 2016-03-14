@@ -1,19 +1,20 @@
 {
-  "name": "MultiVision",
-  "version": "0.0.0",
+  "name": "Library-Management-System",
+  "version": "1.0.0",
   "authors": [
-    "joeeames <joeeames@gmail.com>"
+    "Subhasis Dutta <sxd150830@utdallas.edu>"
   ],
-  "description": "\"Extreme Tech Training\"",
+  "description": "\"Application that interfaces with a backend SQL database implementing a Library Management System. Users of the system are understood to be librarians\"",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "jquery": "~2.1.1",
-    "toastr": "~2.0.2",
-    "angular": "~1.2.16",
-    "angular-resource": "~1.2.16",
-    "angular-route": "~1.2.16",
-    "bootstrap": "~3.1.1",
-    "angular-mocks": "~1.2.16"
+    "jquery": "^2.1.1",
+    "angular": "^1.2.16",
+    "AngularJS-Toaster": "toaster#^1.1.0",
+    "toastr": "^2.0.2",
+    "angular-resource": "^1.2.16",
+    "angular-route": "^1.2.16",
+    "bootstrap": "^3.1.1",
+    "angular-mocks": "^1.2.16"
   }
 }

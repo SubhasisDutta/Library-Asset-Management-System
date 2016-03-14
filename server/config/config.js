@@ -3,7 +3,12 @@ var rootPath = path.normalize(__dirname + '/../../');
 
 module.exports = {
   development: {
-    db: 'mongodb://localhost/multivision',
+    db: 'mongodb://localhost/library',
+    mysql_user: 'root',
+    mysql_password: 'root',
+    mysql_host: 'localhost',
+    mysql_db: 'library',
+    mysql_connection_limit:100,
     rootPath: rootPath,
     port: process.env.PORT || 3030
   },
