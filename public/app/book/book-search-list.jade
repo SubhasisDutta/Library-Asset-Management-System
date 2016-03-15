@@ -1,0 +1,31 @@
+//Created by Subhasis on 3/15/2016.
+.container.top-padding-med
+    .pull-left(style="width:100%")
+        form.form-inline
+            .form-group(style="width:60%")
+                input.form-control(ng-model="search_string", placeholder="Search Book by ISBN, Title or Author Name")
+            .form-group.margin-left-med
+                select.form-control(ng-model="search_option", ng-options="item.value as item.text for item in searchOptions")
+            .form-group.margin-left-med
+                button.btn.btn-primary(ng-click="searchBook()") Search
+    table.table.table-hover.table-striped.table-condensed
+        thead
+            tr
+                th Book ISBN
+                th Title
+                th Authors
+                th Branch ID
+                th Branch Name
+                th No of Copies
+                th No of Available Copies
+        tbody
+            tr(ng-repeat="book in bookSarch | filter:searchText | orderBy:sortOrder")
+                td {{book.isbn }}
+                td
+                    a(href="/book/{{book.isbn}}") {{book.title}}
+                td {{book.author_name }}
+                td {{book.branch_id }}
+                td {{book.branch_name }}
+                td {{book.no_of_copies }}
+                td {{book.no_of_available_copies }}
+

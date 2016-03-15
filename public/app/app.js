@@ -22,6 +22,18 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
       .when('/profile', { templateUrl: '/partials/account/profile',
         controller: 'mvProfileCtrl', resolve: routeRoleChecks.user
       })
+      .when('/search', { templateUrl: '/partials/book/book-search-list',
+          controller: 'mvBookSearchListCtrl'
+      })
+      .when('/loan', { templateUrl: '/partials/courses/course-list',
+          controller: 'mvCourseListCtrl'
+      })
+      .when('/borrower', { templateUrl: '/partials/courses/course-list',
+          controller: 'mvCourseListCtrl'
+      })
+      .when('/fines', { templateUrl: '/partials/courses/course-list',
+          controller: 'mvCourseListCtrl'
+      })
       .when('/courses', { templateUrl: '/partials/courses/course-list',
         controller: 'mvCourseListCtrl'
       })
