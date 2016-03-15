@@ -10,6 +10,7 @@ var pool = mysql_db.createPool({
 });
 
 function query_mysql_database(req,res,queryString){
+    //console.log(queryString);
   pool.getConnection(function (err, connection) {
     if (err) {
       connection.release();
@@ -22,7 +23,9 @@ function query_mysql_database(req,res,queryString){
     connection.query(queryString, function (err, rows) {
       connection.release();
       if (!err) {
-        res.json(rows);
+         // console.log(rows);
+         res.json(rows);
+         // return rows;
       }
     });
 
@@ -34,23 +37,37 @@ function query_mysql_database(req,res,queryString){
 }
 
 exports.getBookSearch = function(req, res) {
-  var queryString ="SELECT * FROM library.book_search_view ";
+  var queryString ="SELECT * FROM book_search_view ";
   var searchString = req.param('search')
   if(req.param('option') == "isbn"){
-    queryString += "WHERE isbn LIKE '%"+searchString+"%'";
+    queryString += "WHERE isbn LIKE '%"+searchString+"%';";
   }else if(req.param('option') == "booktitle"){
-    queryString += "WHERE title LIKE '%"+searchString+"%'";
+    queryString += "WHERE title LIKE '%"+searchString+"%';";
   }else if(req.param('option') == "author"){
     queryString += "WHERE author_name LIKE '%"+searchString+"%'";
   }else{
-    queryString += "WHERE isbn LIKE '%"+searchString+"%' OR title LIKE '%"+searchString+"%' OR author_name LIKE '%"+searchString+"%'";
+    queryString += "WHERE isbn LIKE '%"+searchString+"%' OR title LIKE '%"+searchString+"%' OR author_name LIKE '%"+searchString+"%';";
   }
 
   query_mysql_database(req,res,queryString);
 };
-
-/*exports.getCourseById = function(req, res) {
-  Course.findOne({_id:req.params.id}).exec(function(err, course) {
-    res.send(course);
-  })
-}*/
+exports.getBookById = function(req, res) {
+    var queryString ="SELECT * FROM book ";
+    var book_id = req.params.id;
+    queryString += "WHERE isbn = '"+book_id+"';";
+    pool.getConnection(function(err, connection) {
+        // Use the connection
+        connection.query( queryString, function(err, rows) {
+            // And done with the connection.
+            connection.release();
+            if (!err) {
+                //console.log(rows[0]);
+                if(rows[0] === undefined){
+                    res.json({"code": 404, "status": "Book ISBN not found"});
+                }else{
+                    res.json(rows[0]);
+                }
+            }
+        });
+    });
+}

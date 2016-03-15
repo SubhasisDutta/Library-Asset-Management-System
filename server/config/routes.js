@@ -17,6 +17,7 @@ module.exports = function(app) {
 
   app.get('/api/branches',branches.getBranches);
   app.get('/api/search',search_book.getBookSearch);
+  app.get('/api/book/:id', search_book.getBookById);
 
   app.get('/partials/*', function(req, res) {
     res.render('../../public/app/' + req.params[0]);

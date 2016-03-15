@@ -25,6 +25,9 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
       .when('/search', { templateUrl: '/partials/book/book-search-list',
           controller: 'mvBookSearchListCtrl'
       })
+      .when('/book/:id', { templateUrl: '/partials/book/book-details',
+          controller: 'mvBookDetailCtrl'
+      })
       .when('/loan', { templateUrl: '/partials/courses/course-list',
           controller: 'mvCourseListCtrl'
       })
