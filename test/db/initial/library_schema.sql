@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `borrower` (
   `city` varchar(45) DEFAULT NULL,
   `state` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Card_no`),
+  UNIQUE KEY `Ssn_UNIQUE` (`Ssn`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

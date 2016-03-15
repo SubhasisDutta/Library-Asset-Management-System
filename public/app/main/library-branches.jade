@@ -1,0 +1,11 @@
+.panel.panel-primary
+  .panel-heading.text-center Library Branches
+  .panel-body
+    .row
+        .col-md-3 Branch No
+        .col-md-3 Branch Name
+        .col-md-6 Branch Address
+    .row(ng-repeat="branch in branches | limitTo:10")
+        .col-md-3 {{branch.branch_id }}
+        .col-md-3 {{branch.branch_name }}
+        .col-md-6 {{branch.address }}
