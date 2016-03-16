@@ -1,4 +1,4 @@
-angular.module('app').controller('mvBookSearchListCtrl', function($scope,$http,mvNotifier) {
+angular.module('app').controller('mvBookSearchListCtrl', function($scope,$http,$location,mvNotifier) {
   $scope.bookSarch = [];
 
   $scope.searchBook = function(){
@@ -18,8 +18,6 @@ angular.module('app').controller('mvBookSearchListCtrl', function($scope,$http,m
         mvNotifier.notify($scope.bookSarch.length+" search results found");
       }
     });
-
-
   };
 
   $scope.searchOptions = [{value:"all",text: "Search By All"},
@@ -27,4 +25,9 @@ angular.module('app').controller('mvBookSearchListCtrl', function($scope,$http,m
                         {value: "booktitle",text: "Sort by Book Title"},
                         {value: "author",text: "Sort by Author Name"}];
   $scope.search_option = $scope.searchOptions[0].value;
+
+
+  $scope.goToCheckOut = function(isbn,branch_id){
+    $location.url('/book/checkout/'+isbn+'/'+branch_id);
+  };
 });

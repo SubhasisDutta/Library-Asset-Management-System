@@ -1,5 +1,5 @@
 var mysql_db = require('mysql');
-//var query_mysql = require('../config/mysql.js');
+//var query_mysql = require('../config/mysql');
 
 var pool = mysql_db.createPool({
   connectionLimit : 5,

@@ -12,6 +12,7 @@ module.exports = function(config) {
         password : config.mysql_password,
         database : config.mysql_db
      });
+    //return pool;
 
 
 };

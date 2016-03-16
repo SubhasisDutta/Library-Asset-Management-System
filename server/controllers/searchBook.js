@@ -71,3 +71,25 @@ exports.getBookById = function(req, res) {
         });
     });
 }
+exports.getBookByIdBranchID = function(req, res) {
+    var queryString ="SELECT * FROM book_search_view ";
+    var book_id = req.params.id;
+    var branch_id = req.params.branchId
+    queryString += "WHERE isbn = '"+book_id+"' AND branch_id = '"+branch_id+"';";
+    //console.log(queryString);
+    pool.getConnection(function(err, connection) {
+        // Use the connection
+        connection.query( queryString, function(err, rows) {
+            // And done with the connection.
+            connection.release();
+            if (!err) {
+                //console.log(rows[0]);
+                if(rows[0] === undefined){
+                    res.json({"code": 404, "status": "Book ISBN not found"});
+                }else{
+                    res.json(rows[0]);
+                }
+            }
+        });
+    });
+}

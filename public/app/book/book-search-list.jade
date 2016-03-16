@@ -18,8 +18,9 @@
                 th Branch Name
                 th No of Copies
                 th No of Available Copies
+                th Go To CheckOut
         tbody
-            tr(ng-repeat="book in bookSarch | filter:searchText | orderBy:sortOrder")
+            tr(ng-repeat="book in bookSarch")
                 td {{book.isbn }}
                 td
                     a(href="/book/{{book.isbn}}") {{book.title}}
@@ -28,4 +29,7 @@
                 td {{book.branch_name }}
                 td {{book.no_of_copies }}
                 td {{book.no_of_available_copies }}
+                td(ng-if="book.no_of_available_copies > 0")
+                    button.btn.btn-primary(ng-click="goToCheckOut(book.isbn,book.branch_id)") Go
+
 

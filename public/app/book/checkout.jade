@@ -1,0 +1,28 @@
+.container
+  h1 {{book.title}}
+  .row
+    .col-md-6
+      h4 Book ISBN      : {{book.isbn}}
+      h4 Book ISBN 13   : {{book.ISBN13}}
+      h4 Book Publisher : {{book.Publisher}}
+      h4 Book Pages     : {{book.pages}}
+      h4 Book Authors   : {{available_book.author_name}}
+      h4 Branch Name    : {{available_book.branch_name}}
+      h4 Total Copy     : {{available_book.no_of_copies}}
+      h4 Available Copy : {{available_book.no_of_available_copies}}
+
+    .col-md-3
+      .panel.panel-primary
+        .panel-heading Cover Page
+        .panel-body
+          img(ng-src="{{book.cover}}",style="height:200px;")
+
+    .col-md-3
+      .panel.panel-primary
+        .panel-heading Select Borrower And Checkout
+        .panel-body
+          form.form-inline
+            .form-group
+              select.form-control(ng-model="borrower_option", ng-options="borrower.card_no as borrower.name for borrower in borrowers")
+            .form-group.top-padding-med.margin-left-med
+              button.btn.btn-primary(ng-click="checkOutBook()",ng-if="available_book.no_of_available_copies > 0") Check Out
