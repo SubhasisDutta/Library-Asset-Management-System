@@ -6,11 +6,12 @@
       h4 Book ISBN 13     : {{book.ISBN13}}
       h4 Book Publisher   : {{book.Publisher}}
       h4 Book Pages       : {{book.pages}}
-      h4 Borrower Name    : {{available_loan.name}}
-      h4 Borrower Card No : {{available_loan.card_no}}
-      h4 Branch ID        : {{available_loan.branch_id}}
-      h4 Issue Date       : {{available_loan.date_out| date:'MM/dd/yyyy'}}
-      h4 Due Date         : {{available_loan.due_date| date:'MM/dd/yyyy'}}
+      div(ng-if="available_loan.card_no !== undefined")
+          h4 Borrower Name    : {{available_loan.name}}
+          h4 Borrower Card No : {{available_loan.card_no}}
+          h4 Branch ID        : {{available_loan.branch_id}}
+          h4 Issue Date       : {{available_loan.date_out| date:'MM/dd/yyyy'}}
+          h4 Due Date         : {{available_loan.due_date| date:'MM/dd/yyyy'}}
 
     .col-md-3
       .panel.panel-primary
@@ -22,6 +23,10 @@
       .panel.panel-primary
         .panel-heading Please Confirm Check-In
         .panel-body
-          form.form-inline
+          form.form-inline(name="checkInForm")
+            div(style="position:relative")
+              .form-group
+              input.form-control#checkinDatePicker(ng-model="checkIn_date",placeholder="mm/dd/yyyy",required,date-keys)
+              date-picker(for="checkinDatePicker")
             .form-group.top-padding-med.margin-left-med
-              button.btn.btn-primary(ng-click="checkInBook()") Check In
+              button.btn.btn-primary(ng-click="checkInBook()",ng-disabled="checkInForm.$invalid") Check In

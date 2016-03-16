@@ -6,12 +6,12 @@ angular.module('app').controller('mvLoanCheckinCtrl', function($scope,$routePara
 
 
   $scope.checkInBook = function(){
-      console.log($routeParams.isbn,$routeParams.branch_id);
       var check_out_res = $resource("/api/loan/checkin");
-      var response = check_out_res.save({isbn:$routeParams.isbn,branch_id:$routeParams.branch_id,card_no:$scope.borrower_option},function(){
+      var response = check_out_res.save({isbn:$routeParams.isbn,branch_id:$routeParams.branch_id,card_no:$routeParams.card_no},function(){
           console.log(response);
           mvNotifier.notify(response.status);
-          $scope.available_book=available_books.get({_id:$routeParams.isbn,_branchId:$routeParams.branch_id});
+          $scope.available_loan=loan.get({isbn:$routeParams.isbn,branch_id:$routeParams.branch_id,card_no:$routeParams.card_no});
+
       });
   };
 

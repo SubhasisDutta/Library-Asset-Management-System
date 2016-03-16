@@ -41,12 +41,7 @@ exports.getBorrowerList = function(req, res) {
     query_mysql_database(req,res,queryString);
 };
 exports.checkoutBook = function(req, res) {
-    console.log(req.body);
     validateAndCheckOut(req, res);
-
-    //res.json({"code": 404, "status": "Book ISBN not found"});
-    //var queryString ="SELECT card_no, concat(fname,' ',lname) as name FROM borrower ORDER BY name;";
-    //query_mysql_database(req,res,queryString);
 };
 function validateAndCheckOut(req, res){
     var checkValidBorrower = "SELECT * FROM BORROWER WHERE card_no="+req.body.card_no+"';";

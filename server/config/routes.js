@@ -26,6 +26,7 @@ module.exports = function(app) {
 
   app.get('/api/loan',loans.getLoanSearch);
   app.get('/api/loan/available/:isbn/:branch_id/:card_no',loans.getLoanById);
+  app.post('/api/loan/checkin',loans.checkInBook);
 
   app.get('/api/borrower/names', borrowers.getBorrowerList);
 

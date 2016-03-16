@@ -74,4 +74,41 @@ exports.getLoanById = function(req, res) {
             }
         });
     });
+};
+exports.checkInBook = function(req, res) {
+    console.log(req.body);
+    checkLoanAvailability(req, res);
+};
+function checkLoanAvailability(req,res){
+    var checkBookAvailable ="SELECT count(*) as count FROM BOOK_LOAN_SEARCH_VIEW WHERE isbn = '"+req.body.isbn+"' AND branch_id = '"+req.body.branch_id+"' AND card_no = '"+req.body.card_no+"' LIMIT 1;";
+    pool.getConnection(function(err, connection) {
+        connection.query( checkBookAvailable, function(err, rows) {
+            connection.release();
+            if (!err) {
+                console.log(rows[0]);
+                if(rows[0].count < 1){
+                    res.json({"code": 400, "status": "Loan not Available."});
+                    return;
+                }else{
+                    updateIntoBookLoans(req,res);
+                }
+            }
+        });
+    });
+}
+function formatDate(dateObj){
+    return dateObj.getFullYear()+"-"+(dateObj.getMonth()+1)+"-"+dateObj.getDate();
+}
+function updateIntoBookLoans(req,res){
+    var todayDate = new Date();
+    var updateBookLoan = "UPDATE book_loans SET date_in='"+formatDate(todayDate)+"' WHERE card_no='"+req.body.card_no+"' AND isbn='"+req.body.isbn+"' AND branch_id='"+req.body.branch_id+"' LIMIT 1;";
+    pool.getConnection(function(err, connection) {
+        connection.query( updateBookLoan, function(err, rows) {
+            connection.release();
+            if (!err) {
+                res.json({"code": 200, "status": "Book Checked In Successfully!"});
+                return;
+            }
+        });
+    });
 }
