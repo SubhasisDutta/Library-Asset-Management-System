@@ -3,7 +3,7 @@
 angular.module('app').directive('datePicker', function () {
     return {
         restrict: "E",
-        templateUrl: "/partials/directives/datepicker.html",
+        templateUrl: "/partials/directives/datepicker",
         controller: function($scope, calendarHelper) {
             $scope.showDatePicker = false;
 
