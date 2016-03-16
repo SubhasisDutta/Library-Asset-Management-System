@@ -100,8 +100,9 @@ function formatDate(dateObj){
     return dateObj.getFullYear()+"-"+(dateObj.getMonth()+1)+"-"+dateObj.getDate();
 }
 function updateIntoBookLoans(req,res){
-    var todayDate = new Date();
-    var updateBookLoan = "UPDATE book_loans SET date_in='"+formatDate(todayDate)+"' WHERE card_no='"+req.body.card_no+"' AND isbn='"+req.body.isbn+"' AND branch_id='"+req.body.branch_id+"' LIMIT 1;";
+    console.log(req.body.date_in);
+    var updateBookLoan = "UPDATE book_loans SET date_in='"+req.body.date_in+"' WHERE loan_id='"+req.body.loan_id+"';";
+    console.log(updateBookLoan);
     pool.getConnection(function(err, connection) {
         connection.query( updateBookLoan, function(err, rows) {
             connection.release();

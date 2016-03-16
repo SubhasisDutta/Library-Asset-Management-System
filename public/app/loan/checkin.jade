@@ -23,10 +23,9 @@
       .panel.panel-primary
         .panel-heading Please Confirm Check-In
         .panel-body
-          form.form-inline(name="checkInForm")
+          form.form-inline
             div(style="position:relative")
               .form-group
-              input.form-control#checkinDatePicker(ng-model="checkIn_date",placeholder="mm/dd/yyyy",required,date-keys)
-              date-picker(for="checkinDatePicker")
+                input.form-control#checkinDatePicker(ng-model="date_in",placeholder="mm/dd/yyyy")
             .form-group.top-padding-med.margin-left-med
-              button.btn.btn-primary(ng-click="checkInBook()") Check In
+              button.btn.btn-primary(ng-click="checkInBook(date_in)") Check In

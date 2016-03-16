@@ -38,7 +38,7 @@ angular.module('app').directive('datePicker', function () {
             }
 
             $scope.selectDate = function (day) {
-                $scope.element.val(($scope.calendar.month + 1) + "/" + day + "/" + + $scope.calendar.year);
+                $scope.element.val($scope.calendar.year+"-"+($scope.calendar.month + 1) + "-" + day );
                 $scope.showDatePicker = false;
             }
 
