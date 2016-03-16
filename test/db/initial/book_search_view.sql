@@ -20,3 +20,8 @@ SELECT book_branchView.isbn,book_branchView.title,book_branchView.author_name, b
 		IFNULL(book_branchView.no_of_copies - book_loanview.checkin , book_branchView.no_of_copies) as no_of_available_copies
 FROM book_branchView LEFT JOIN book_loanview
 ON (book_branchView.isbn = book_loanview.isbn AND book_branchView.branch_id = book_loanview.branch_id);
+
+CREATE VIEW BOOK_LOAN_SEARCH_VIEW AS
+SELECT CONCAT(bor.fname,' ',bor.lname) as name,bl.isbn,bl.card_no,bl.branch_id,bl.date_out,bl.due_date 
+FROM book_loans bl INNER JOIN borrower bor ON bl.card_no=bor.card_no 
+WHERE (bl.date_in='0000-00-00' or bl.date_in is null) ORDER BY bor.fname;

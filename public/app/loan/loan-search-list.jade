@@ -1,0 +1,32 @@
+//Created by Subhasis on 3/15/2016.
+.container.top-padding-med
+    .pull-left(style="width:100%")
+        form.form-inline
+            .form-group(style="width:60%")
+                input.form-control(ng-model="search_string", placeholder="Search for Loaned Book by ISBN, Borrower Card No or Name")
+            .form-group.margin-left-med
+                select.form-control(ng-model="search_option", ng-options="item.value as item.text for item in searchOptions")
+            .form-group.margin-left-med
+                button.btn.btn-primary(ng-click="searchLoans()") Search
+    table.table.table-hover.table-striped.table-condensed
+        thead
+            tr
+                th Book ISBN
+                th Borrower Name
+                th Borrower Card No
+                th Branch ID
+                th Date Check Out
+                th Date Due
+                th Go To Check IN
+        tbody
+            tr(ng-repeat="book in bookSarch")
+                td {{book.isbn }}
+                td {{book.name }}
+                td {{book.card_no }}
+                td {{book.branch_id }}
+                td {{book.date_out| date:'MM/dd/yyyy'}}
+                td {{book.due_date| date:'MM/dd/yyyy' }}
+                td
+                    button.btn.btn-primary(ng-click="goToCheckIn(book.isbn,book.card_no,book.branch_id)") Go
+
+

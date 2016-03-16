@@ -1,0 +1,27 @@
+.container
+  h1 {{book.title}}
+  .row
+    .col-md-6
+      h4 Book ISBN        : {{book.isbn}}
+      h4 Book ISBN 13     : {{book.ISBN13}}
+      h4 Book Publisher   : {{book.Publisher}}
+      h4 Book Pages       : {{book.pages}}
+      h4 Borrower Name    : {{available_loan.name}}
+      h4 Borrower Card No : {{available_loan.card_no}}
+      h4 Branch ID        : {{available_loan.branch_id}}
+      h4 Issue Date       : {{available_loan.date_out| date:'MM/dd/yyyy'}}
+      h4 Due Date         : {{available_loan.due_date| date:'MM/dd/yyyy'}}
+
+    .col-md-3
+      .panel.panel-primary
+        .panel-heading Cover Page
+        .panel-body
+          img(ng-src="{{book.cover}}",style="height:200px;")
+
+    .col-md-3(ng-if="available_loan.card_no !== undefined")
+      .panel.panel-primary
+        .panel-heading Please Confirm Check-In
+        .panel-body
+          form.form-inline
+            .form-group.top-padding-med.margin-left-med
+              button.btn.btn-primary(ng-click="checkInBook()") Check In
