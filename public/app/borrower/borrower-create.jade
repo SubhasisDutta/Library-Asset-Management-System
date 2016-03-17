@@ -1,0 +1,44 @@
+.container
+  .well
+    form.form-horizontal(name="signupForm")
+      fieldset
+        legend New Borrower Information
+        .form-group
+          label.col-md-2.control-label(for="fname") First Name *
+          .col-md-10
+            input.form-control(name="fname", type="text", placeholder="Please type in your First Name", ng-model="borrower.fname", required)
+        .form-group
+          label.col-md-2.control-label(for="lname") Last Name *
+          .col-md-10
+            input.form-control(name="lname", type="text", placeholder="Last Name", ng-model="borrower.lname", required)
+        .form-group
+          label.col-md-2.control-label(for="ssn") SSN *
+          .col-md-10
+            input.form-control(name="ssn", type="text", placeholder="Please provide tour SSN number", ng-model="borrower.ssn", required)
+        .form-group
+          label.col-md-2.control-label(for="address") Address *
+          .col-md-10
+            input.form-control(name="address", type="text", placeholder="Please provide your Street Address", ng-model="borrower.address", required)
+        .form-group
+          label.col-md-2.control-label(for="city") City
+          .col-md-10
+            input.form-control(name="city", type="text", placeholder="City", ng-model="borrower.city")
+        .form-group
+          label.col-md-2.control-label(for="state") State
+          .col-md-10
+            input.form-control(name="state", type="text", placeholder="State", ng-model="borrower.state")
+        .form-group
+          label.col-md-2.control-label(for="email") Email
+          .col-md-10
+            input.form-control(name="email", type="email", placeholder="Email", ng-model="borrower.email")
+        .form-group
+          label.col-md-2.control-label(for="phone") Phone
+          .col-md-10
+            input.form-control(name="phone", type="text", placeholder="Please provide your Phone Number", ng-model="borrower.phone")
+
+        .form-group
+          .col-md-10.col-md-offset-2
+            .pull-right
+              button.btn.btn-primary(ng-click="signup()", ng-disabled="signupForm.$invalid") Submit
+              | &nbsp;
+              a.btn.btn-default(href="/borrower") Cancel

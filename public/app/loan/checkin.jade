@@ -26,6 +26,6 @@
           form.form-inline
             div(style="position:relative")
               .form-group
-                input.form-control#checkinDatePicker(ng-model="date_in",placeholder="mm/dd/yyyy")
+                input.form-control(ng-model="date_in",placeholder="mm/dd/yyyy")
             .form-group.top-padding-med.margin-left-med
               button.btn.btn-primary(ng-click="checkInBook(date_in)") Check In

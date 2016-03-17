@@ -1,4 +1,4 @@
-angular.module('app').controller('mvBookCheckoutCtrl', function($scope,$routeParams,$resource,$location,mvNotifier) {
+angular.module('app').controller('mvBookCheckoutCtrl', function($scope,$routeParams,$resource,mvNotifier) {
   var books = $resource("/api/book/:_id");
   $scope.book = books.get({_id: $routeParams.isbn});
   var available_books = $resource("/api/book/available/:_id/:_branchId");

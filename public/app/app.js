@@ -37,8 +37,11 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
       .when('/loan/checkin/:isbn/:branch_id/:card_no', { templateUrl: '/partials/loan/checkin',
           controller: 'mvLoanCheckinCtrl'
       })
-      .when('/borrower', { templateUrl: '/partials/courses/course-list',
-          controller: 'mvCourseListCtrl'
+      .when('/borrower', { templateUrl: '/partials/borrower/borrower-list',
+          controller: 'mvBorrowerListCtrl'
+      })
+      .when('/borrower/create', { templateUrl: '/partials/borrower/borrower-create',
+          controller: 'mvSignupBorrowerCtrl'
       })
       .when('/fines', { templateUrl: '/partials/courses/course-list',
           controller: 'mvCourseListCtrl'

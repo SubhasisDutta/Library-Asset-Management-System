@@ -29,7 +29,8 @@ module.exports = function(app) {
   app.post('/api/loan/checkin',loans.checkInBook);
 
   app.get('/api/borrower/names', borrowers.getBorrowerList);
-
+  app.get('/api/borrower/top/:no', borrowers.getTopBorrowerList);
+  app.post('/api/borrower', borrowers.createBorrower);
 
   app.get('/partials/*', function(req, res) {
     res.render('../../public/app/' + req.params[0]);

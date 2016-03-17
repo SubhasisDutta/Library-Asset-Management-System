@@ -1,0 +1,26 @@
+.container.top-padding-med
+  .pull-right
+      a.btn.btn-primary(href="/borrower/create",style="width: 100%;margin-bottom: 10px;") Add Borrower
+  table.table.table-hover.table-striped.table-condensed
+    thead
+      tr
+        th Card No
+        th SSN
+        th First Name
+        th Last Name
+        th Address
+        th Phone
+        th E-mail
+        th City
+        th State
+    tbody
+      tr(ng-repeat="borrower in borrowers")
+        td {{borrower.Card_no}}
+        td {{borrower.Ssn}}
+        td {{borrower.Fname}}
+        td {{borrower.Lname}}
+        td {{borrower.Address}}
+        td {{borrower.Phone}}
+        td {{borrower.email}}
+        td {{borrower.city}}
+        td {{borrower.state}}

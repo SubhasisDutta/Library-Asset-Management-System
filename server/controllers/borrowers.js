@@ -36,8 +36,101 @@ function query_mysql_database(req,res,queryString){
     });
 }
 
+exports.createBorrower = function(req, res) {
+
+    var checkBorrowerExist = "SELECT count(*) AS count FROM BORROWER WHERE ssn='"+req.body.borrower.ssn+"' OR email='"+req.body.borrower.email+"';";
+    pool.getConnection(function(err, connection) {
+        connection.query( checkBorrowerExist, function(err, rows) {
+            connection.release();
+            if(rows[0].count > 0){
+                res.json({"code": 400, "status": "Cannot Add Borrower!!! A Borrower with the same SSN or E-mail already exists."});
+                return;
+            }else{
+                console.log("Checked Borrower does not exist.");
+                generateBorrowerID(req,res);
+            }
+        });
+        connection.on('error', function (err) {
+            res.json({"code": 500, "status": "Error in connection database"});
+            return;
+        });
+    });
+};
+function generateBorrowerID(req, res){
+    var getLastBorrowerID = "SELECT MAX(card_no) AS last FROM borrower ORDER BY card_no;";
+    pool.getConnection(function(err, connection) {
+        connection.query( getLastBorrowerID, function(err, rows) {
+            connection.release();
+            if (!err) {
+                if(rows[0] === undefined){
+                    res.json({"code": 404, "status": "Cannot Add Borrower!!! Problem in generating Borrower ID."});
+                    return;
+                }else{
+                    var newId=rows[0].last;
+                    newId=newId.replace("ID","");
+                    newId=Number(newId)+1;
+                    newId = "ID"+pad(newId,6);
+                    insertBorrower(req,res,newId);
+                }
+            }
+        });
+        connection.on('error', function (err) {
+            res.json({"code": 500, "status": "Error in connection database"});
+            return;
+        });
+    });
+}
+function pad(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+function insertBorrower(req, res,newCard_id){
+    if(req.body.borrower.email === undefined){
+        req.body.borrower.email=null;
+    }else{
+        req.body.borrower.email="'"+req.body.borrower.email+"'";
+    }
+    if(req.body.borrower.phone === undefined){
+        req.body.borrower.phone=null;
+    }else{
+        req.body.borrower.phone="'"+req.body.borrower.phone+"'";
+    }
+    if(req.body.borrower.city === undefined){
+        req.body.borrower.city = null;
+    }else{
+        req.body.borrower.city="'"+req.body.borrower.city+"'";
+    }
+    if(req.body.borrower.state === undefined){
+        req.body.borrower.state = null;
+    }else{
+        req.body.borrower.state="'"+req.body.borrower.state+"'";
+    }
+    var insertBorrower = "INSERT INTO borrower (Card_no,Ssn,Fname,Lname,Address,Phone,email,city,state) " +
+        "VALUES ('"+newCard_id+"', '"+req.body.borrower.ssn+"', '"+req.body.borrower.fname+"', " +
+        "'"+req.body.borrower.lname+"', '"+req.body.borrower.address+"', "+req.body.borrower.phone+", " +
+        " "+req.body.borrower.email+", "+req.body.borrower.city+", "+req.body.borrower.state+");";
+    pool.getConnection(function(err, connection) {
+        connection.query( insertBorrower, function(err, rows) {
+            connection.release();
+            if (!err) {
+                res.json({"code": 200, "status": "New Borrower added !!!"});
+                return;
+            }
+        });
+        connection.on('error', function (err) {
+            res.json({"code": 500, "status": "Error in connection database"});
+            return;
+        });
+    });
+}
+
 exports.getBorrowerList = function(req, res) {
     var queryString ="SELECT card_no, concat(fname,' ',lname) as name FROM borrower ORDER BY name;";
+    query_mysql_database(req,res,queryString);
+};
+exports.getTopBorrowerList = function(req, res) {
+    var queryString ="SELECT * FROM borrower ORDER BY card_no DESC LIMIT "+req.params.no+";";
     query_mysql_database(req,res,queryString);
 };
 exports.checkoutBook = function(req, res) {
