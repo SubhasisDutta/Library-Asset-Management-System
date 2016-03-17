@@ -112,6 +112,14 @@ exports.getFines = function(req, res) {
         "ORDER BY f.fine_amt DESC;";
     query_mysql_database(req,res,queryString);
 };
+exports.borrowersFine = function(req, res) {
+    var queryString ="SELECT bor.card_no,concat(bor.fname,' ',bor.lname) AS name, SUM(f.fine_amt) as total_fine " +
+        "FROM book_loans bl inner join borrower bor on bl.card_no=bor.card_no " +
+        "INNER JOIN book b on bl.isbn=b.isbn INNER JOIN fines f ON bl.loan_id=f.loan_id " +
+        "WHERE paid =0 AND (bl.date_in='0000-00-00' OR date_in is null OR date_in>due_date) " +
+        "GROUP BY bor.card_no;";
+    query_mysql_database(req,res,queryString);
+};
 function query_mysql_database(req,res,queryString){
     pool.getConnection(function (err, connection) {
         if (err) {
@@ -119,9 +127,6 @@ function query_mysql_database(req,res,queryString){
             res.json({"code": 100, "status": "Error in connection database"});
             return;
         }
-
-        console.log('connected as id ' + connection.threadId);
-
         connection.query(queryString, function (err, rows) {
             connection.release();
             if (!err) {
@@ -129,7 +134,6 @@ function query_mysql_database(req,res,queryString){
                 return;
             }
         });
-
         connection.on('error', function (err) {
             res.json({"code": 100, "status": "Error in connection database"});
             return;

@@ -2,7 +2,7 @@
   .pull-left(style="width:60%")
     form.form-inline
       .form-group(style="width:60%")
-        input.form-control(ng-model="searchText", placeholder="Filter fines by Card No, Isbn ...")
+        input.form-control(ng-model="searchText", placeholder="Filter fines by Card No, Borrower Name ...")
       .form-group.margin-left-med
         select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
   .pull-right(style="width:30%;")
@@ -17,5 +17,5 @@
     tbody
       tr(ng-repeat="fine in fines | filter:searchText | orderBy:sortOrder")
         th {{fine.card_no}}
-        th {{fine.date_out | date}}
-        td {{fine.fine_amount | currency }}
+        th {{fine.name}}
+        td {{fine.total_fine | currency }}
