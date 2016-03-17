@@ -5,6 +5,7 @@ var auth = require('./auth'),
     search_book = require('../controllers/searchBook'),
     borrowers = require('../controllers/borrowers'),
     loans=require('../controllers/searchLoan'),
+    fines=require('../controllers/fines'),
   mongoose = require('mongoose'),
   User = mongoose.model('User');
 
@@ -31,6 +32,9 @@ module.exports = function(app) {
   app.get('/api/borrower/names', borrowers.getBorrowerList);
   app.get('/api/borrower/top/:no', borrowers.getTopBorrowerList);
   app.post('/api/borrower', borrowers.createBorrower);
+
+  app.post('/api/updateFines',fines.updateFines);
+  app.get('/api/fines',fines.getFines);
 
   app.get('/partials/*', function(req, res) {
     res.render('../../public/app/' + req.params[0]);

@@ -43,8 +43,11 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
       .when('/borrower/create', { templateUrl: '/partials/borrower/borrower-create',
           controller: 'mvSignupBorrowerCtrl'
       })
-      .when('/fines', { templateUrl: '/partials/courses/course-list',
-          controller: 'mvCourseListCtrl'
+      .when('/fines', { templateUrl: '/partials/fine/fine-list',
+          controller: 'mvFineListCtrl'
+      })
+      .when('/fines/payment', { templateUrl: '/partials/fine/fine-payment-list',
+          controller: 'mvFinePaymentListCtrl'
       })
       .when('/courses', { templateUrl: '/partials/courses/course-list',
         controller: 'mvCourseListCtrl'

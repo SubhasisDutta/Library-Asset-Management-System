@@ -91,9 +91,8 @@ CREATE TABLE IF NOT EXISTS `book_loans` (
 #DROP TABLE if exists `fines`;
 CREATE TABLE IF NOT EXISTS `fines` (
   `loan_id` int(11) NOT NULL,
-  `fine_amt` decimal(10,0) DEFAULT '0',
+  `fine_amt` decimal(6,2) DEFAULT '0.00',
   `paid` bit(1) DEFAULT b'0',
   PRIMARY KEY (`loan_id`),
   CONSTRAINT `fk_fines_bookloans` FOREIGN KEY (`loan_id`) REFERENCES `book_loans` (`loan_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-

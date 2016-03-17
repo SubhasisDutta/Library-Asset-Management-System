@@ -1,0 +1,21 @@
+.container.top-padding-med
+  .pull-left(style="width:60%")
+    form.form-inline
+      .form-group(style="width:60%")
+        input.form-control(ng-model="searchText", placeholder="Filter fines by Card No, Isbn ...")
+      .form-group.margin-left-med
+        select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+  .pull-right(style="width:30%;")
+      .form-group(style="float:right;")
+          button.btn.btn-primary(ng-click="goToFines()") Go To Fines
+  table.table.table-hover.table-striped.table-condensed
+    thead
+      tr
+        th Borrower Card No
+        th Borrower Name
+        th Payment Pending
+    tbody
+      tr(ng-repeat="fine in fines | filter:searchText | orderBy:sortOrder")
+        th {{fine.card_no}}
+        th {{fine.date_out | date}}
+        td {{fine.fine_amount | currency }}
