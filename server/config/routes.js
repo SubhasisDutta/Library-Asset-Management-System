@@ -35,6 +35,7 @@ module.exports = function(app) {
 
   app.post('/api/updateFines',fines.updateFines);
   app.get('/api/fines',fines.getFines);
+  app.post('/api/fine/close',fines.closeFine);
 
   app.get('/partials/*', function(req, res) {
     res.render('../../public/app/' + req.params[0]);

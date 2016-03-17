@@ -126,6 +126,7 @@ function query_mysql_database(req,res,queryString){
             connection.release();
             if (!err) {
                 res.json(rows);
+                return;
             }
         });
 
@@ -135,3 +136,24 @@ function query_mysql_database(req,res,queryString){
         });
     });
 }
+exports.closeFine = function(req, res) {
+    var queryString ="UPDATE fines SET paid =1 WHERE loan_id='"+req.body.loan_id+"';";
+    pool.getConnection(function (err, connection) {
+        if (err) {
+            connection.release();
+            res.json({"code": 100, "status": "Error in connection database"});
+            return;
+        }
+        connection.query(queryString, function (err, rows) {
+            connection.release();
+            if (!err) {
+                res.json({"code": 200, "status": "Payment Accepted. Loan "+req.body.loan_id+" closed."});
+                return;
+            }
+        });
+        connection.on('error', function (err) {
+            res.json({"code": 100, "status": "Error in connection database"});
+            return;
+        });
+    });
+};

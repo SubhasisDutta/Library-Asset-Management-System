@@ -22,4 +22,31 @@ angular.module('app').controller('mvFineListCtrl', function($scope, $location,$r
   $scope.goToFinePayment = function(){
     $location.url('/fines/payment');
   };
+  $scope.closeLoan = function(loan_id){
+    //console.log(loan_id);
+    var check_out_res = $resource("/api/fine/close");
+    var response = check_out_res.save({loan_id:loan_id},function(){
+          //console.log(response);
+          mvNotifier.notify(response.status);
+          $scope.fines=$resource("/api/fines").query();
+    });
+
+  };
 });
+angular.module('app').directive('ngConfirmClick', [
+    function(){
+        return {
+            priority: -1,
+            restrict: 'A',
+            link: function(scope, element, attrs){
+                element.bind('click', function(e){
+                    var message = attrs.ngConfirmClick;
+                    if(message && !confirm(message)){
+                        e.stopImmediatePropagation();
+                        e.preventDefault();
+                    }
+                });
+            }
+        }
+    }
+]);
