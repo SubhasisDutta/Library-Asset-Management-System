@@ -28,7 +28,7 @@ def main():
             book_author_map = []
             if parse_firs_line:
                 book_line = ['isbn', 'title', 'isbn13', 'cover', 'publisher', 'pages']
-                author_line = ['author_id', 'title', 'fname', 'mname', 'lname', 'suffix']
+                author_line = ['author_id', 'fullname', 'title', 'fname', 'mname', 'lname', 'suffix']
                 book_author_map = ["isbn", "author_id"]
                 output_books_stream.writerow(book_line)
                 output_authors_stream.writerow(author_line)
@@ -52,13 +52,13 @@ def main():
                         authors[author] = author_count
                         tokens = author.split(' ')
                         if len(tokens) == 1:
-                            author_line = [author_count, '', '', '', tokens[0], '']
+                            author_line = [author_count, author, '', '', '', tokens[0], '']
                         elif len(tokens) == 2:
-                            author_line = [author_count, '', tokens[0], '', tokens[-1], '']
+                            author_line = [author_count, author, '', tokens[0], '', tokens[-1], '']
                         elif len(tokens) == 3:
-                            author_line = [author_count, '', tokens[0], tokens[1], tokens[-1], '']
+                            author_line = [author_count, author, '', tokens[0], tokens[1], tokens[-1], '']
                         else:
-                            author_line = [author_count, '', tokens[0], tokens[1]+' '+tokens[2], tokens[-1], '']
+                            author_line = [author_count, author, '', tokens[0], tokens[1]+' '+tokens[2], tokens[-1], '']
                         if len(author_line) > 0:
                             output_authors_stream.writerow(author_line)
                     author_id = authors.get(author)

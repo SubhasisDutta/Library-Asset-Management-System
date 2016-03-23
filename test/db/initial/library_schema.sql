@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `book` (
 #DROP TABLE if exists `authors`;
 CREATE TABLE IF NOT EXISTS `authors` (
   `author_id` int(11) NOT NULL AUTO_INCREMENT,
+  `fullname` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `title` varchar(45) DEFAULT NULL,
   `fname` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `mname` varchar(100) CHARACTER SET utf8 DEFAULT NULL,

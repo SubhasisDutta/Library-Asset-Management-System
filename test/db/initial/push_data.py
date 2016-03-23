@@ -86,7 +86,7 @@ def inset_authors():
     config_dict={"output_table": "authors",
                  "batch_size": 1000,
                  "output_schema": "library",
-                 "column_name": "author_id,title,fname,mname,lname,suffix"
+                 "column_name": "author_id,fullname,title,fname,mname,lname,suffix"
                  }
     manager = MySqlManager(config_dict)
     count = 0
