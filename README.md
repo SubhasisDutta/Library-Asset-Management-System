@@ -1,4 +1,4 @@
-# ShareXYZ
+# Library-Asset-Management-System
 A Platform to Share and track books in a library setup.
 
 # Installation
